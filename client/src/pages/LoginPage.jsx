@@ -40,9 +40,9 @@ const LoginPage = () => {
         <div className="text-center mb-10">
           <div className="inline-flex items-center justify-center gap-4 text-primary mb-6 group cursor-pointer" onClick={() => navigate('/')}>
             <div className="p-1 bg-[var(--bg-card)] rounded-xl shadow-sm group-hover:shadow-md transition-all duration-500">
-              <img src="/logo.png" alt="InsightGrid Logo" className="w-12 h-12 object-contain" />
+              <img src="/logo.png" alt="Lumina Logo" className="w-12 h-12 object-contain" />
             </div>
-            <span className="text-4xl font-black tracking-tight text-[var(--text-main)] group-hover:text-primary transition-colors">InsightGrid</span>
+            <span className="text-4xl font-black tracking-tight text-[var(--text-main)] group-hover:text-primary transition-colors">Lumina</span>
           </div>
           <h1 className="text-3xl font-extrabold text-primary mb-2">Welcome Back</h1>
           <p className="text-slate-500 font-medium tracking-tight">Access your professional analytics suite</p>
@@ -108,7 +108,7 @@ const LoginPage = () => {
 
           <div className="mt-10 pt-8 border-t border-slate-100 text-center">
             <p className="text-slate-500 text-sm font-medium">
-              New to Halleyx?{' '}
+              New to Lumina?{' '}
               <Link to="/register" className="text-primary font-bold hover:underline underline-offset-4 ml-1">Create Account</Link>
             </p>
           </div>

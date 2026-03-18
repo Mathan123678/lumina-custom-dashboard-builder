@@ -183,8 +183,8 @@ const DashboardPage = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-black text-[var(--text-main)] tracking-tight flex items-center gap-3">
-            <img src="/logo.png" alt="InsightGrid" className="w-10 h-10 object-contain" />
-            InsightGrid Analytics Dashboard
+            <img src="/logo.png" alt="Lumina" className="w-10 h-10 object-contain" />
+            Lumina Analytics Dashboard
           </h1>
           <p className="text-[var(--text-muted)] mt-1 font-medium ml-1">Real-time insights from your customer order data.</p>
         </div>

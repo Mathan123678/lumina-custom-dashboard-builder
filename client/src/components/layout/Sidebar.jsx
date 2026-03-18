@@ -24,9 +24,9 @@ const Sidebar = () => {
       <div className="p-8">
         <div className="flex items-center gap-4 text-primary group cursor-pointer" onClick={() => navigate('/')}>
           <div className="p-1 bg-white dark:bg-slate-800 rounded-xl shadow-sm group-hover:shadow-md transition-all duration-300">
-            <img src="/logo.png" alt="InsightGrid Logo" className="w-10 h-10 object-contain" />
+            <img src="/logo.png" alt="Lumina Logo" className="w-10 h-10 object-contain" />
           </div>
-          <span className="text-2xl font-black tracking-tight text-[var(--text-main)] group-hover:text-primary transition-colors">InsightGrid</span>
+          <span className="text-2xl font-black tracking-tight text-[var(--text-main)] group-hover:text-primary transition-colors">Lumina</span>
         </div>
       </div>
       

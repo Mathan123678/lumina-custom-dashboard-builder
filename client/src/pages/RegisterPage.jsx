@@ -56,9 +56,9 @@ const RegisterPage = () => {
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center gap-4 text-primary mb-6 group cursor-pointer" onClick={() => navigate('/')}>
             <div className="p-1 bg-[var(--bg-card)] rounded-xl shadow-sm group-hover:shadow-md transition-all duration-500">
-              <img src="/logo.png" alt="InsightGrid Logo" className="w-12 h-12 object-contain" />
+              <img src="/logo.png" alt="Lumina Logo" className="w-12 h-12 object-contain" />
             </div>
-            <span className="text-4xl font-black tracking-tight text-[var(--text-main)] group-hover:text-primary transition-colors">InsightGrid</span>
+            <span className="text-4xl font-black tracking-tight text-[var(--text-main)] group-hover:text-primary transition-colors">Lumina</span>
           </div>
           <h1 className="text-3xl font-extrabold text-primary mb-2">Create Account</h1>
           <p className="text-slate-500 font-medium tracking-tight">Join our professional analytics ecosystem</p>
