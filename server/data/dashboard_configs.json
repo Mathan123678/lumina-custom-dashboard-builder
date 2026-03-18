@@ -1,0 +1,107 @@
+[
+  {
+    "widgets": [
+      {
+        "id": "kpi_total_revenue",
+        "type": "kpi",
+        "title": "Total Revenue",
+        "description": "Sum of all completed orders",
+        "layout": {
+          "x": 0,
+          "y": 0,
+          "w": 3,
+          "h": 2
+        },
+        "settings": {
+          "metric": "Total amount",
+          "aggregation": "sum",
+          "format": "currency",
+          "precision": 2
+        }
+      },
+      {
+        "id": "kpi_order_count",
+        "type": "kpi",
+        "title": "Active Orders",
+        "description": "Count of pending and in-progress orders",
+        "layout": {
+          "x": 3,
+          "y": 0,
+          "w": 3,
+          "h": 2
+        },
+        "settings": {
+          "metric": "Status",
+          "aggregation": "count",
+          "format": "number",
+          "precision": 0
+        }
+      },
+      {
+        "id": "chart_revenue_by_product",
+        "type": "bar",
+        "title": "Revenue by Product",
+        "description": "Total revenue breakdown by telecom product",
+        "layout": {
+          "x": 0,
+          "y": 2,
+          "w": 6,
+          "h": 4
+        },
+        "settings": {
+          "xAxis": "Product",
+          "yAxis": "Total amount",
+          "color": "#54bd95",
+          "showLabel": true,
+          "showLegend": true
+        }
+      },
+      {
+        "id": "chart_order_status",
+        "type": "pie",
+        "title": "Order Status Distribution",
+        "description": "Current status of all orders",
+        "layout": {
+          "x": 6,
+          "y": 2,
+          "w": 6,
+          "h": 4
+        },
+        "settings": {
+          "xAxis": "Status",
+          "yAxis": "Quantity",
+          "showLabel": true,
+          "showLegend": true
+        }
+      },
+      {
+        "id": "recent_orders_table",
+        "type": "table",
+        "title": "Recent Orders",
+        "description": "Overview of latest customer transactions",
+        "layout": {
+          "x": 0,
+          "y": 6,
+          "w": 12,
+          "h": 4
+        },
+        "settings": {
+          "columns": [
+            "Customer name",
+            "Product",
+            "Total amount",
+            "Status",
+            "Created by"
+          ],
+          "sort": "Descending",
+          "pagination": 5,
+          "fontSize": 14,
+          "headerBgColor": "#54bd95"
+        }
+      }
+    ],
+    "_id": "mock_1773650962946_5olv8sjcs",
+    "createdAt": "2026-03-16T08:49:22.946Z",
+    "updatedAt": "2026-03-16T08:49:22.946Z"
+  }
+]
