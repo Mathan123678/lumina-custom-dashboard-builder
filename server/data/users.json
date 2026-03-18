@@ -174,5 +174,13 @@
     "_id": "mock_1773818098360_y7upfjjf1",
     "createdAt": "2026-03-18T07:14:58.360Z",
     "updatedAt": "2026-03-18T07:14:58.360Z"
+  },
+  {
+    "name": "Tester Two",
+    "email": "test2@example.com",
+    "password": "$2b$10$znKMYRX8FjGiZMHIvXHki.tjah4FIFKz8l.59MQv4PWt.RCOOHDAq",
+    "_id": "mock_1773823884358_qayy7oyly",
+    "createdAt": "2026-03-18T08:51:24.359Z",
+    "updatedAt": "2026-03-18T08:51:24.359Z"
   }
 ]
