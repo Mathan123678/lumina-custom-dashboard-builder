@@ -1,14 +1,15 @@
 const { models: { Order } } = require('../db');
 const orderEvents = require('../utils/orderEvents');
 
-function emitOrdersChanged(action, id) {
-  orderEvents.emit('orders_changed', { action, id, ts: Date.now() });
+function emitOrdersChanged(action, id, organization) {
+  orderEvents.emit('orders_changed', { action, id, organization, ts: Date.now() });
 }
 
 // Get all orders
 exports.getAllOrders = async (req, res) => {
   try {
-    const orders = await Order.find().sort({ createdAt: -1 });
+    const organization = req.user?.organization;
+    const orders = await Order.find({ organization }).sort({ createdAt: -1 });
     res.status(200).json(orders);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -31,7 +32,10 @@ exports.streamOrders = (req, res) => {
   sendEvent('hello', { ok: true, ts: Date.now() });
   const pingId = setInterval(() => sendEvent('ping', { ts: Date.now() }), 25000);
 
-  const onChange = (payload) => sendEvent('orders_changed', payload);
+  const organization = req.user?.organization;
+  const onChange = (payload) => {
+    if (payload.organization === organization) sendEvent('orders_changed', payload);
+  };
   orderEvents.on('orders_changed', onChange);
 
   req.on('close', () => {
@@ -43,9 +47,10 @@ exports.streamOrders = (req, res) => {
 // Create an order
 exports.createOrder = async (req, res) => {
   try {
-    const newOrder = new Order(req.body);
+    const organization = req.user?.organization;
+    const newOrder = new Order({ ...req.body, organization });
     await newOrder.save();
-    emitOrdersChanged('created', newOrder._id || newOrder.id);
+    emitOrdersChanged('created', newOrder._id || newOrder.id, organization);
     res.status(201).json(newOrder);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -55,9 +60,14 @@ exports.createOrder = async (req, res) => {
 // Update an order
 exports.updateOrder = async (req, res) => {
   try {
-    const updatedOrder = await Order.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!updatedOrder) return res.status(404).json({ message: 'Order not found' });
-    emitOrdersChanged('updated', updatedOrder._id || updatedOrder.id);
+    const organization = req.user?.organization;
+    const updatedOrder = await Order.findOneAndUpdate(
+      { _id: req.params.id, organization },
+      req.body,
+      { new: true }
+    );
+    if (!updatedOrder) return res.status(404).json({ message: 'Order not found or unauthorized' });
+    emitOrdersChanged('updated', updatedOrder._id || updatedOrder.id, organization);
     res.status(200).json(updatedOrder);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -67,9 +77,10 @@ exports.updateOrder = async (req, res) => {
 // Delete an order
 exports.deleteOrder = async (req, res) => {
   try {
-    const deletedOrder = await Order.findByIdAndDelete(req.params.id);
-    if (!deletedOrder) return res.status(404).json({ message: 'Order not found' });
-    emitOrdersChanged('deleted', deletedOrder._id || deletedOrder.id);
+    const organization = req.user?.organization;
+    const deletedOrder = await Order.findOneAndDelete({ _id: req.params.id, organization });
+    if (!deletedOrder) return res.status(404).json({ message: 'Order not found or unauthorized' });
+    emitOrdersChanged('deleted', deletedOrder._id || deletedOrder.id, organization);
     res.status(200).json({ message: 'Order deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const DashboardConfigSchema = new mongoose.Schema({
+  organization: { type: String, required: true },
   widgets: [{
     id: { type: String, required: true },
     type: { type: String, required: true }, // 'kpi', 'bar', 'line', 'pie', 'area', 'scatter', 'table'

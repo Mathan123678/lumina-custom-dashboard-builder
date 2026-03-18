@@ -8,11 +8,12 @@ const { models: { User } } = require("../db");
 exports.register = async (req, res) => {
   try {
     const name = String(req.body?.name || '').trim();
+    const organization = String(req.body?.organization || '').trim();
     const email = String(req.body?.email || '').trim().toLowerCase();
     const password = String(req.body?.password || '');
 
-    if (!name || !email || !password) {
-      return res.status(400).json({ message: 'Please provide name, email and password' });
+    if (!name || !organization || !email || !password) {
+      return res.status(400).json({ message: 'Please provide name, organization, email and password' });
     }
 
     // Check for user
@@ -30,9 +31,9 @@ exports.register = async (req, res) => {
       // Hash password even in JSON persistence mode
       const salt = await bcrypt.genSalt(10);
       const hashed = await bcrypt.hash(password, salt);
-      user = await new User({ name, email, password: hashed }).save();
+      user = await new User({ name, organization, email, password: hashed }).save();
     } else {
-      user = await User.create({ name, email, password });
+      user = await User.create({ name, organization, email, password });
     }
 
     sendTokenResponse(user, 201, res);
@@ -103,6 +104,7 @@ const sendTokenResponse = (user, statusCode, res) => {
     user: {
       id: user._id || user.id,
       name: user.name,
+      organization: user.organization,
       email: user.email
     }
   });

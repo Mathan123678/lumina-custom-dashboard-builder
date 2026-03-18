@@ -3,7 +3,8 @@ const { models: { DashboardConfig } } = require('../db');
 // Get dashboard config
 exports.getDashboardConfig = async (req, res) => {
   try {
-    let config = await DashboardConfig.findOne();
+    const organization = req.user?.organization;
+    let config = await DashboardConfig.findOne({ organization });
     if (!config) {
       // Return empty config if none exists
       return res.status(200).json({ widgets: [] });
@@ -17,13 +18,14 @@ exports.getDashboardConfig = async (req, res) => {
 // Save or Update dashboard config
 exports.saveDashboardConfig = async (req, res) => {
   try {
-    let config = await DashboardConfig.findOne();
+    const organization = req.user?.organization;
+    let config = await DashboardConfig.findOne({ organization });
     if (config) {
       config.widgets = req.body.widgets;
       const updatedConfig = await config.save();
       return res.status(200).json(updatedConfig);
     } else {
-      const newConfig = new DashboardConfig({ widgets: req.body.widgets });
+      const newConfig = new DashboardConfig({ organization, widgets: req.body.widgets });
       const savedConfig = await newConfig.save();
       return res.status(201).json(savedConfig);
     }

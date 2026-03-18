@@ -6,6 +6,7 @@ import { Mail, Lock, User, UserPlus, AlertCircle, BarChart3 } from 'lucide-react
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
     name: '',
+    organization: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -32,6 +33,7 @@ const RegisterPage = () => {
     try {
       await register({
         name: formData.name,
+        organization: formData.organization,
         email: formData.email,
         password: formData.password
       });
@@ -84,6 +86,22 @@ const RegisterPage = () => {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="John Doe"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-2xl py-4 pl-12 pr-4 text-slate-900 outline-none focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all font-medium placeholder:text-slate-400"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Organization</label>
+              <div className="relative group">
+                <BarChart3 className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" size={20} />
+                <input
+                  type="text"
+                  name="organization"
+                  required
+                  value={formData.organization}
+                  onChange={handleChange}
+                  placeholder="Acme Corp"
                   className="w-full bg-slate-50 border border-slate-200 rounded-2xl py-4 pl-12 pr-4 text-slate-900 outline-none focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all font-medium placeholder:text-slate-400"
                 />
               </div>

@@ -1,8 +1,15 @@
-import { Bell, Search, User } from 'lucide-react';
+import { Bell, Search, User, LogOut } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-  const { user, searchTerm, setSearchTerm } = useAuth();
+  const { user, searchTerm, setSearchTerm, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   return (
     <header className="h-20 border-b border-[var(--border-main)] bg-[var(--bg-card)]/80 backdrop-blur-2xl sticky top-0 z-30 px-8 flex items-center justify-between shadow-sm transition-colors duration-300">
@@ -30,7 +37,7 @@ const Header = () => {
         <div className="flex items-center gap-4 cursor-pointer group">
           <div className="flex flex-col items-end text-right">
             <span className="text-sm font-bold text-[var(--text-main)] group-hover:text-primary transition-colors">{user?.name || 'Account'}</span>
-            <span className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-tighter">System Admin</span>
+            <span className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-tighter">{user?.organization || 'System Admin'}</span>
           </div>
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-slate-200 to-slate-100 dark:from-slate-700 dark:to-slate-800 p-[1px] group-hover:rotate-6 transition-transform">
             <div className="w-full h-full rounded-xl bg-[var(--bg-card)] flex items-center justify-center text-primary border border-[var(--border-main)]">
@@ -38,6 +45,16 @@ const Header = () => {
             </div>
           </div>
         </div>
+
+        <div className="h-6 w-[1px] bg-[var(--border-main)]"></div>
+
+        <button 
+          onClick={handleLogout}
+          title="Logout"
+          className="p-2 text-[var(--text-muted)] hover:text-red-500 hover:bg-red-50 dark:hover:text-red-400 dark:hover:bg-red-900/20 rounded-xl transition-all"
+        >
+          <LogOut size={22} className="hover:translate-x-1 transition-transform" />
+        </button>
       </div>
     </header>
   );

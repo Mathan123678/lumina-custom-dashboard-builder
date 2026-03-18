@@ -29,8 +29,8 @@ const ConfigureDashboardPage = () => {
           dashboardService.getConfig(),
           orderService.getAll()
         ]);
-        setWidgets(configRes.data.widgets || []);
-        setOrders(ordersRes.data);
+        setWidgets(configRes?.data?.widgets || []);
+        setOrders(ordersRes?.data || []);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
